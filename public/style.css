@@ -60,17 +60,16 @@ h2 {
 .avatar {
   width: 30px;
   height: 30px;
-  border-radius: 50%;
-  background-color: #ccc;
-  margin: 0 10px;
+  margin: 0 20px 0 0;
 }
 
-.avatar.red {
-  background-color: #f44336;
+.avatar.blue img {
+  height: 50px;
+  width: 50px;
 }
-
-.avatar.blue {
-  background-color: #2196f3;
+.avatar.red img {
+  height: 50px;
+  width: 50px;
 }
 
 .bubble {
