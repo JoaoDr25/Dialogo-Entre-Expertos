@@ -70,7 +70,7 @@ export const responderExperto02 = async (req, res) => {
     });
     await entradaUsuario.save();
 
-    const historial = await message.find().sort({ fecha: -1 }).limit(5); // últimos 5
+    const historial = await message.find().sort({ fecha: -1 }).limit(5); 
     const historialTexto = historial.reverse().map(msg => `${msg.autor}: ${msg.mensaje}`).join('\n');
 
 

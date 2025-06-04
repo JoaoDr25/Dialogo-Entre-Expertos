@@ -39,7 +39,7 @@ export async function obtenerRespuesta(prompt) {
     return textoRespuesta;
 
   } catch (error) {
-    console.error("❌ Error desde Gemini REST:", error.message);
+    console.error("Error desde Gemini REST:", error.message);
     throw new Error("No se pudo obtener respuesta desde Gemini REST");
   }
 }
