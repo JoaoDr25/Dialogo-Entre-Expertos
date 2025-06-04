@@ -1,70 +1,58 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Diálogo entre Expertos</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  
-  <div class="dialog-container">
-    
-    <h2>Debate entre IA</h2>
 
-     <div class="input-area">
-  <input type="text" id="topicInput" placeholder="Escribe un tema para debatir..." />
- 
-</div>
+<body>
+
+  <div class="dialog-container">
+
+    <h2>DIÁLOGO ENTRE EXPERTOS</h2>
+
+    <div class="input-area">
+      <input type="text" id="topicInput" value="¿Crees en la existencia de vida despues de la muerte?" placeholder="Escribe un tema para debatir..." />
+
+    </div>
 
     <div class="selectors">
-     
-        <label for="">RELIGIOSO</label>
-        
-        <label for="">ATEO</label>
-     
+
+      <label class="label blue">RELIGIOSO</label>
+
+      <label class="label red">ATEO</label>
+
     </div>
 
     <div class="chat-box">
       <div class="message left">
         <div class="avatar red">
-            <img src="fotos/images-removebg-preview.png" alt="robot">
+          <!-- <img src="fotos/images-removebg-preview.png" alt="robot"> -->
         </div>
-        <div class="bubble">....</div>
+        <!-- <div class="bubble">...</div> -->
       </div>
 
       <div class="message right">
         <div class="avatar blue">
-            <img src="fotos/robot.png" alt="robot">
+          <!-- <img src="fotos/robot.png" alt="robot"> -->
         </div>
-        <div class="bubble">......</div>
-      </div>
-
-      <div class="message left">
-        <div class="avatar red">
-            <img src="fotos/images-removebg-preview.png" alt="robot">
-        </div>
-        <div class="bubble">...</div>
-      </div>
-
-      <div class="message right">
-        <div class="avatar blue">
-          <img src="fotos/robot.png" alt="robot">
-        </div>
-        <div class="bubble">...</div>
+        <!-- <div class="bubble">...</div> -->
       </div>
     </div>
 
     <div class="button-group">
-      <button class="btn blue">Respuesta Experto 1</button>
-      <button class="btn red">Respuesta Experto 2</button>
+      <button class="btn blue">Respuesta <br> Experto 01</button>
+      <button class="btn red">Respuesta <br> Experto 02</button>
       <button class="btn white">Limpiar Historial</button>
       <button class="btn green">Exportar a PDF</button>
     </div>
-   
 
-  </div>  
-<script src="script.js"></script>
+
+  </div>
+  <script src="script.js"></script>
 </body>
 
 </html>

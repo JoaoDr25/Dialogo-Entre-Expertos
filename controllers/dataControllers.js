@@ -5,54 +5,54 @@ import { experto02 } from "../prompt.js";
 import PDFDocument from 'pdfkit';
 
 export const obtenerConversacion = async (req, res) => {
-    try {
-        const mensajes = await message.find().sort({ fecha: 1 });
-        res.status(200).json(mensajes);
-    } catch (error) {
-        res.status(500).json({ error: 'Error al obtener la conversación.' });
-    }
+  try {
+    const mensajes = await message.find().sort({ fecha: 1 });
+    res.status(200).json(mensajes);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener la conversación.' });
+  }
 };
 
 
 export const responderExperto01 = async (req, res) => {
-    try {
-        const { mensajeUsuario } = req.body;
+  try {
+    const { mensajeUsuario } = req.body;
 
-        if (!mensajeUsuario || mensajeUsuario.trim() === '') {
-            return res.status(400).json({ error: 'El mensaje del usuario es obligatorio.' });
-        }
-
-        const entradaUsuario = new message({
-            autor: 'usuario',
-            mensaje: mensajeUsuario
-        });
-
-        await entradaUsuario.save();
-
-        const historial = await message.find().sort({ fecha: 1 });
-        const historialTexto = historial.map(msg => `${msg.autor}: ${msg.mensaje}`).join('\n');
-
-        const promptFinal = experto01.replace('{{conversationHistory}}', historialTexto);
-        console.log("Prompt enviado a Gemini:", promptFinal);
-
-        const respuestaGenerada = await obtenerRespuesta(promptFinal);
-
-        const respuestaExperto = new message({
-            autor: 'experto01',
-            mensaje: respuestaGenerada
-        })
-
-        await respuestaExperto.save();
-
-        res.status(200).json({
-            entradaUsuario,
-            respuestaExperto
-        });
-
-    } catch (error) {
-        console.error("Error completo en responderExperto01:", error);
-        res.status(500).json({ error: 'Error al generar la respuesta del experto 1.' });
+    if (!mensajeUsuario || mensajeUsuario.trim() === '') {
+      return res.status(400).json({ error: 'El mensaje del usuario es obligatorio.' });
     }
+
+    const entradaUsuario = new message({
+      autor: 'usuario',
+      mensaje: mensajeUsuario
+    });
+
+    await entradaUsuario.save();
+
+    const historial = await message.find().sort({ fecha: 1 });
+    const historialTexto = historial.map(msg => `${msg.autor}: ${msg.mensaje}`).join('\n');
+
+    const promptFinal = experto01.replace('{{conversationHistory}}', historialTexto);
+    console.log("Prompt enviado a Gemini:", promptFinal);
+
+    const respuestaGenerada = await obtenerRespuesta(promptFinal);
+
+    const respuestaExperto = new message({
+      autor: 'experto01',
+      mensaje: respuestaGenerada
+    })
+
+    await respuestaExperto.save();
+
+    res.status(200).json({
+      entradaUsuario,
+      respuestaExperto
+    });
+
+  } catch (error) {
+    console.error("Error completo en responderExperto01:", error);
+    res.status(500).json({ error: 'Error al generar la respuesta del experto 1.' });
+  }
 };
 
 
@@ -70,13 +70,14 @@ export const responderExperto02 = async (req, res) => {
     });
     await entradaUsuario.save();
 
-    const historial = await message.find().sort({ fecha: 1 });
-    const historialTexto = historial.map(msg => `${msg.autor}: ${msg.mensaje}`).join('\n');
+    const historial = await message.find().sort({ fecha: -1 }).limit(5); // últimos 5
+    const historialTexto = historial.reverse().map(msg => `${msg.autor}: ${msg.mensaje}`).join('\n');
+
 
     const promptFinal = experto02.replace('{{conversationHistory}}', historialTexto);
     console.log("Prompt enviado a Gemini (experto02):", promptFinal);
 
-   
+
     const respuestaGenerada = await obtenerRespuesta(promptFinal);
 
     const respuestaExperto = new message({
@@ -95,6 +96,7 @@ export const responderExperto02 = async (req, res) => {
     res.status(500).json({ error: 'Error al generar la respuesta del experto 2.' });
   }
 };
+
 
 
 export const limpiarHistorial = async (req, res) => {
