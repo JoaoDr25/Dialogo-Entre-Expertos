@@ -62,7 +62,7 @@ btnExpert1.addEventListener('click', async () => {
   }
 
   try {
-    const res1 = await fetch('http://localhost:3004/api/experto01/respond', {
+    const res1 = await fetch('http://127.0.0.1:3004/api/experto01/respond', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ mensajeUsuario: texto })
@@ -99,7 +99,7 @@ btnExpert2.addEventListener('click', async () => {
   }
 
   try {
-    const res2 = await fetch('http://localhost:3004/api/experto02/respond', {
+    const res2 = await fetch('http://127.0.0.1:3004/api/experto02/respond', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ mensajeUsuario: texto })
@@ -125,7 +125,7 @@ const btnClear = document.querySelector('.btn.white');
 
 btnClear.addEventListener('click', async () => {
   try {
-    const res = await fetch('http://localhost:3004/api/conversations', {
+    const res = await fetch('http://127.0.0.1:3004/api/conversations', {
       method: 'DELETE'
     });
 
@@ -149,7 +149,7 @@ const btnExport = document.querySelector('.btn.green');
 
 btnExport.addEventListener('click', async () => {
   try {
-    const response = await fetch('http://localhost:3004/api/export/pdf', {
+    const response = await fetch('http://127.0.0.1:3004/api/export/pdf', {
       method: 'GET'
     });
 
